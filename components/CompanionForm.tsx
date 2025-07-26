@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -48,20 +47,16 @@ const CompanionForm = () => {
     },
   });
 
-  const onSubmit = () => {
-    console.log('Form submitted');
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const companion = await createCompanion(values);
+
+    if (companion) {
+      redirect(`/companions/${companion.id}`);
+    } else {
+      console.log('Failed to create a companion');
+      redirect('/');
+    }
   };
-
-  //   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  //     const companion = await createCompanion(values);
-
-  //     if (companion) {
-  //       redirect(`/companions/${companion.id}`);
-  //     } else {
-  //       console.log('Failed to create a companion');
-  //       redirect('/');
-  //     }
-  //   };
 
   return (
     <Form {...form}>

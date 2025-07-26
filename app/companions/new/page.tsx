@@ -6,8 +6,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const NewCompanion = async () => {
-  // const { userId } = await auth();
-  // if (!userId) redirect('/sign-in');
+  const { userId } = await auth();
+  if (!userId) redirect('/sign-in');
 
   // const canCreateCompanion = await newCompanionPermissions();
 
